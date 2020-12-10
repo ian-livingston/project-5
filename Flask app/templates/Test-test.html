@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <title>Food finder</title>
+    <style>
+
+body {
+    background-color: #EDEBEB;
+    font-family: Nunito;
+    background-image: url('/static/images/Earth.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position: top;
+    background-size: 100%;
+    background-position-y: 300px;
+
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+  25% {
+    transform: rotate(3deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotate(-3deg) translate3d(0, 0, 0);
+  }
+  75% {
+    transform: rotate(1deg) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+}
+@keyframes storm {
+  0% {
+    transform: translate3d(0, 0, 0) translateZ(0);
+  }
+  25% {
+    transform: translate3d(4px, 0, 0) translateZ(0);
+  }
+  50% {
+    transform: translate3d(-3px, 0, 0) translateZ(0);
+  }
+  75% {
+    transform: translate3d(2px, 0, 0) translateZ(0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) translateZ(0);
+  }
+}
+
+@keyframes widen {
+  transform: scale(1.5);
+}
+
+
+.button {
+  display: inline-block;
+  border-radius: 30px;
+  background-color: #2F5597;
+  border: none;
+  color: #EDEBEB;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 400px;
+  height: 130px;
+  transition: all 0.3s;
+  cursor: pointer;
+  margin: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  background-color: #273958;
+  animation: rotate 0.7s ease-in-out both;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.3s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.3s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+  animation: storm 0.7s ease-in-out both;
+  animation-delay: 0.06s;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 200px minmax(200px, 400px) auto minmax(200px, 400px) 200px;
+}
+
+.top {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  text-align: center;
+}
+
+.top-center {
+  grid-column-start: 2;
+  grid-column-end: 5;
+  text-align: center;
+  float: center;
+}
+
+.top-left {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  text-align: center;
+  float: center;
+}
+
+.top-middle-middle {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  text-align: center;
+  float: center;
+}
+
+.top-right {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  text-align: center;
+  float: center;
+}
+
+.bottom {
+  grid-column-start: 1;
+  grid-column-end: 6;
+}
+
+.project-title {
+  font-weight: 600;
+  font-size: 150px;
+  color:  #2F5597;
+  text-align: center;
+  margin-left: 30px;
+  margin-top: 50px;
+  top: 150px;
+}
+
+.project-subtitle {
+  font-weight: bold;
+  font-size: 40px;
+  color:  #2F5597;
+  text-align: center;
+  margin-top: -120px;
+}
+
+.globe-image {
+  z-index: 1;
+  position: relative;
+  top: 0px;
+} 
+
+#globe-image {
+  height: auto;
+  width: 100%;
+  z-index: 1;
+  margin: 0;
+  right: 0%;
+  left: 0%;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.form__group {  
+  padding: 15px;
+  width: 50%;
+}
+
+.form__field {
+  width: 1000px;
+  height: auto;
+  border: 0;
+  border-bottom: 5px solid #2F5597;
+  outline: 0;
+  text-align: center;
+  font-size: 40px;
+  color: #2F5597;
+  padding: 20px 0;
+  background: #EDEBEB;
+  transition: border-color 0.2s;
+  border-radius: 20px;
+  opacity: 80%;
+  
+}
+.form__field::placeholder {
+  color:  #2F5597;
+  font-size: 40px;
+}
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 40px;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 3rem;
+  color: #2F5597;
+  padding: 10px;
+}
+
+.form__field:focus {
+  transition: 1s;
+  font-size: 40px;
+  width: 1200px;
+  border-width: 9px;
+  border-color: #2F5597;
+  border-image-slice: 1;
+  top: -20px;
+  opacity: 100%;
+}
+.form__field:focus ~ .form__label {
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 26px;
+  color: #2F5597;
+  font-weight: 700;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+  box-shadow: none;
+  font-size: 40px;
+}
+
+.box {
+  display: inline-block;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  user-select: none;
+  padding: 10px;
+  font-weight: bolder;
+}
+.box label {
+  font-size: 26px;
+  color: #2F5597;
+  position: absolute;
+  z-index: 10;
+  padding-left: 50px;
+  cursor: pointer;
+}
+.box input {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+.box input:checked ~ .check {
+  border-color: #2F5597;
+  box-shadow: 0px 0px 0px 15px #2F5597 inset;
+}
+.box input:checked ~ .check::after {
+  opacity: 1;
+  transform: scale(1);
+}
+.box .check {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 100px;
+  background-color: #EDEBEB;
+  border: 2px solid #2F5597;
+  box-shadow: 0px 0px 0px 0px #2F5597 inset;
+  transition: all 0.15s cubic-bezier(0, 1.05, 0.72, 1.07);
+}
+.box .check::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 4;
+  position: absolute;
+  transform: scale(0);
+  background-size: 50%;
+  background-image: url("http://s6.picofile.com/d/8392306668/c38c12a0-6db3-47d4-a80c-7dad8fab5186/checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition-delay: 0.2s !important;
+  transition: all 0.25s cubic-bezier(0, 1.05, 0.72, 1.07);
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  left: 40%;
+  border: 2px solid #2F5597;
+  max-width: fit-content;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #EDEBEB;
+ }
+
+ .container2 {
+  position: relative;
+  text-align: center;
+  left: 45%;
+  padding: 20px;
+  display: none;
+}
+
+.ui-menu {
+    font-size: 30px;
+    background: #EDEBEB;
+    color: #2F5597
+    height:30px;
+    font-size:20px;
+}
+
+.ui-menu .ui-menu-item {
+    font-family: Nunito;
+    background:#EDEBEB;
+    color: #2F5597
+    height:30px;
+    font-size:30px;
+}
+
+/*# sourceMappingURL=checkboxes.css.map */
+
+
+    </style>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <link rel="stylesheet" href="/resources/demos/style.css">
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      	
+      $( "#food-search" ).autocomplete( "enable" );
+      
+      $( function() {
+        var availableTags = [
+        'Caldillo de congrio', 'Cioppino', 'Fish soup bee hoon', 'Clam chowder', 'Cullen skink', "Fisherman's soup", 'Gumbo', 'Herring soup', 'Jaecheop-guk', 'Lohikeitto', 'Lung fung soup', 'Mohinga', 'Paila marina', 'Pho', 'Pindang', 'She-crab soup', 'Sliced fish soup', 'Tom yum', 'Ukha', 'Soto ayam', 'Soto (food)', 'Noodle soup', 'Coto makassar', 'Opor ayam', 'Bawang goreng', 'Pempek', 'Konro', 'Tongseng', 'Bak kut teh', 'Pallubasa', 'Rawon', 'Saksang', 'Saltah', 'Kwetiau ayam', 'Mie cakalang', 'Mie celor', 'Mie kari', 'Mie kocok', 'Soto mie', 'Macaroni soup', 'Black sesame soup', 'Buddha Jumps Over the Wall', 'Duck blood and vermicelli soup', 'Hulatang', 'Jiuniang', 'Liver soup', 'Nam ngiao', 'Patriotic soup', 'Borscht', 'Caldo verde', 'French onion soup', 'Kenchin-jiru', 'Kusksu', 'Vichyssoise', 'Okroshka', 'Garbure', 'Pot-au-feu', 'Ragout fin', 'Ratatouille', 'Tourin', 'Capra e fagioli', 'Ginataang kalabasa', 'Or lam', 'Khinkali', 'Hōtō', 'Udon', 'Miso soup', 'Chankonabe', 'Cream stew', 'Butajiru', 'Noppe', 'Ohaw', 'Zōni', 'Champon', 'Ramen', 'Zosui', 'Fugu chiri', 'Harihari-nabe', 'Imoni', 'Kiritanpo', 'Motsunabe', 'Oden', 'Shabu-shabu', 'Sukiyaki', 'Tsukemen', 'Soupe au fromage', 'Queso flameado', 'Cocido madrileño', 'Cocido montañés', "Escudella i carn d'olla", 'Gazpachuelo', 'Ajoblanco', 'Alicot', 'Caldo galego', 'Caparrones', 'Cocido lebaniego', 'Fabada asturiana', 'Fabes con almejas', 'Porra antequerana', 'Salmorejo', 'Chakna', 'Rajma', 'Haleem', 'Kadhi', 'Khichra', 'Nihari', 'Paya (food)', 'Tea egg', 'Soba', 'Japanese curry', 'Kōrēgusu', 'Kal-guksu', 'Mak-guksu', 'Naengmyeon', 'Kimchi', 'Saimin', 'Spam (food)', 'Char siu', 'Wedding soup', 'Kuy teav', 'Khao poon', 'Hokkien mee', 'Kyay oh', 'Ohn no khao swè', 'Batchoy', 'Mami soup', 'Khanom chin', 'Green curry', "Soup all'Imperatrice", 'Zuppa alla modenese', 'Mykyrokka', 'Coq au vin', 'Ash-e doogh', 'Aush reshteh', 'Bouillon (soup)', 'Caldo de costilla', 'Caldo tlalpeño', 'Changua', 'Chè bà ba', 'Ching bo leung', 'Chorba frik', 'Cow cod soup', 'Cuchuco', 'Draw soup', 'Ezogelin soup', 'Ginisang munggo', 'Harput meatballs', 'Hyderabadi marag', 'Pomegranate soup', 'Prežganka', 'Scotch broth', 'Shambar', 'Siemieniotka', 'Sopa de pata', 'Sopa teologa', 'Soup Number Five', 'Suaasat', 'Taco soup', 'Talunan', 'Tapado', 'Thenthuk', 'Tinola', 'Toyga soup', 'Yayla çorbası', 'Blåbärssoppa', 'Rose hip soup', 'Acorn noodle soup', 'Boat noodles', 'Bún mắm', 'Jat-guksu', 'Khow suey', 'Kong-guksu', 'Mie aceh', 'Milmyeon', 'Mont di', 'Pancit buko', 'Ulmyeon', 'Yaka mein', 'Yukgaejang', 'Samlar machu', 'Canh chua', 'Sinigang', 'Tom kha kai', 'Rasam (dish)', 'Solyanka', 'Istrian stew', 'Styrian sour soup', 'Abunuabunu', 'Margi special', 'Awara broth', 'Booyah (stew)', 'Brunswick stew', 'Caldo de pollo', 'Chicken and dumplings', 'Gova Kaldu', 'Samgye-tang', 'Sinampalukan', 'Southern Illinois chowder', 'Waterzooi', 'Binakol', 'Binignit', 'Ginataang ampalaya', 'Ginataang isda', 'Ginataang manok', 'Gising-gising', 'Inubaran', 'Sinanglay', 'Sopas', 'Krupnik (soup)', 'Rosół', 'Sancocho', 'Sai bhaji', 'Aush', 'Sulu köfte', 'Tzatziki', 'Kaeng pa', 'Kaeng som', 'Nam tok (food)', 'Tom khlong', 'Koottu', 'Obara (stew)', 'Goulash', 'Sour cherry soup', 'Borș de burechiușe', 'Isi ewu', 'Caldo de siete mares', 'Menudo (soup)', 'Nopalito', 'Pozole', 'Keng No Mai', 'Khao piak sen', 'Gomguk', 'Baeksuk', 'Bosintang', 'Budae-jjigae', 'Chueo-tang', 'Dak-bokkeum-tang', 'Doenjang-guk', 'Doenjang-jjigae', 'Dongchimi', 'Galbi-tang', 'Gamja-ongsimi', 'Gamja-tang', 'Gopchang-jeongol', 'Gukbap', 'Gul-gukbap', 'Heugyeomso-tang', 'Jeongol', 'Jjigae', 'Kimchi-jjigae', 'Maeun-tang', 'Mandu-guk', 'Miyeok-guk', 'Ori-tang', 'Seolleongtang', 'Sinseollo', 'Sundubu-jjigae', 'Sungeo-guk', 'Tteokguk', 'Mannish water', 'Manchow soup', 'Molagoottal', 'Poriyal', 'Theeyal', 'Gulyásleves', 'Palóc soup', 'Soup joumou', 'Lentil soup', 'Magiritsa', 'Bread soup', 'Hochzeitssuppe', 'Steckrübeneintopf', 'Chikhirtma', 'Encebollado', 'Fanesca', 'Ajiaco', 'Mute (soup)', 'Valdiviano', 'Num Banh Chok', 'Samlar kakou', 'Partan bree', 'Windsor soup', 'Tacacá', 'Gochujang', 'Seafood birdsnest', 'Kat kyi kaik', 'Balchão', 'Crab puff', 'Crawfish pie', 'Curanto', 'Fideuà', 'Kedgeree', 'Moules-frites', 'Orange cuttlefish', "'Ota 'ika", 'Paella', 'Paelya', 'Piaparan', 'Seafood basket', 'Laing (food)', 'Clams casino', 'Fried clams', 'Black pepper crab', 'Lobster Thermidor', 'Lobster Newberg', 'Lobster roll', 'Miruhulee boava', 'Nakji-bokkeum', 'San-nakji', 'Takoyaki', 'Oysters Rockefeller', 'Hangtown fry', 'Oysters en brochette', 'Steak and oyster pie', 'Kinilaw', 'Camaron rebosado', 'Chạo tôm', 'Chili shrimp', 'Har gow', 'Potted shrimps', 'Prawn cracker', 'White boiled shrimp', 'Philippine adobo', 'Arròs negre', 'Ikameshi', 'Pancit choca', 'Agwi-jjim', 'Amplang', 'Arsik', 'Baccalà alla lucana', 'Bourdeto', 'Brandade', 'Ceviche', 'Caldeirada', 'Cappon magro', 'Catfish stew', 'Coulibiac', 'Dressed herring', 'Eo-mandu', 'Esgarrat', 'Fish and chips', 'Fischbrötchen', 'Fish and brewis', 'Fish finger sandwich', 'Fish head casserole', 'Fish head curry', 'Fish pie', 'Taco', 'Fishcake', 'Hongeo-hoe', 'Huachinango a la Veracruzana', 'Paksiw', "Jansson's temptation", 'Kalakukko', 'Kibbeling', 'Kokotxas', 'Levengi', 'Linagpang', 'Linarang', 'Lumpia', 'Machher Jhol', 'Maachha Bihana', 'Masgouf', 'Moqueca', 'Pastilla', 'Pinangat na isda', 'Pira caldo', 'Poke (Hawaiian dish)', 'Pudpod', 'Run down', 'Salade niçoise', 'Sabzi polo', 'Sambal stingray', 'Sarsiado', 'Sata (food)', 'Sate bandeng', 'Sayadieh', 'Shorshe ilish', 'Stargazy pie', 'Thieboudienne', 'Yassa (food)', 'Gravlax', 'Yusheng', 'Tuna fish sandwich', 'Cakalang fufu', 'Garudiya', 'Gulha', 'Mas huni', 'Mas riha', 'Tuna casserole', 'Dahi machha', 'Malabar Matthi Curry', 'Panta bhat', 'Canapé', 'Zakuski', 'French fries', 'Mechado', 'Rendang', 'Steak and kidney pudding', 'Mashed potato', 'Alambre', 'Balbacua', 'Bandeja paisa', 'Beef chow fun', 'Beef Hatkora', 'Beef Manhattan', 'Beef on weck', 'Bistecca alla fiorentina', 'Bistek', 'Bitterballen', 'Bulalo', 'Bulgogi', 'Carne asada', 'Chairo (stew)', 'Chateaubriand (dish)', 'Chorrillana', 'Coda alla vaccinara', 'Cowboy beans', 'Curry beef triangle', 'Dendeng', 'Gepuk', 'French dip', 'Gaisburger Marsch', 'Galbi', 'Korma', 'Ginger beef', 'Hamburger', 'Hayashi rice', 'Hortobágyi palacsinta', 'Kerala beef fry', 'Lomo a lo pobre', 'Lomo saltado', 'Machaca', 'Machacado con huevo', 'Mocotó', 'Mongolian beef', 'Morcón (Filipino cuisine)', 'Pares (food)', 'Pašticada', 'Rambak petis', 'Rinderbraten', 'Rollatini', 'Salată de boeuf', 'Scaloppine', 'Sha cha beef', 'Sha phaley', 'Skomakarlåda', 'Sloppy joe', 'Steamed meatball', 'Stovies', 'Suadero', 'Tafelspitz', 'Tavern sandwich', 'Bò nướng lá lốt', 'Tournedos Rossini', 'Tourtière', 'Yukpo', 'Zrazy', 'Beef Stroganoff', 'Carpaccio', 'Crudos', 'Blanquette de veau', 'Bratwurst', "Calf's liver and bacon", 'Ossobuco', 'Parmigiana', 'Saltimbocca', 'Veal Orloff', 'Burrito', 'Gordita', 'Enchilada', 'Pabellón criollo', 'Quesadilla', 'Tangpyeong-chae', 'Nokdu-muk', 'Gnocchi', 'Rousong', 'Steak and kidney pie', 'Salisbury steak', 'Béarnaise sauce', 'Steak au poivre', 'Cheesesteak', 'Chicken fried steak', 'Bollito misto', 'Fajita', 'Hamburg steak', 'Pepper steak', 'Roast beef', 'Italian beef', 'Selat solo', "Shooter's sandwich", 'Steak de Burgo', 'Steak Diane', 'Steak frites', 'Steak sandwich', 'Kabkabou', 'Pork tenderloin sandwich', 'Pork chop bun', 'Cachopo (dish)', 'Palatschinke', 'Veal Milanese', 'Goat curry', 'Aloo gosht', 'Bhutan (dish)', 'Birria', 'Boodog', 'Cachupa', 'Chapli kebab', 'Chow mein', 'Dalcha', 'Dhansak', 'Casserole', 'Hyderabadi biryani', 'Kabsa', 'Kaldereta', 'Keema Matar', 'Pasanda', 'Kokoretsi', 'Massaman curry', 'Momo (food)', 'Mughlai paratha', 'Mutton curry', 'Nasi kebuli', 'Pasty', 'Rogan josh', 'Sate kambing', 'Sate klatak', 'Seco (food)', 'Tandoori chicken', 'Vindaloo', 'Kebab', 'Jameed', 'Kuurdak', 'Lechazo', 'Squab pie', 'Abgoosht', 'Alinazik kebab', 'Arrosticini', 'Cağ kebabı', 'Cawl', 'Ćevapi', 'Colonial goose', 'Devilled kidneys', 'Doner kebab', 'Fahsa', 'Gheimeh', 'Haneeth', 'Kabuli palaw', 'Kairi ka do pyaza', 'Kol böreği', 'Laal maans', 'Lancashire hotpot', 'Lunggoi Katsa', 'Mandi (food)', 'Mansaf', 'Moussaka', 'Navarin (food)', 'Pieds paquets', 'Pinchitos', 'Quzi', 'Saleeg', 'Sarburma', 'Scotch pie', 'Scouse (food)', 'Sfiha', "Shepherd's pie", 'Skilpadjies', 'Smalahove', 'Sosatie', 'Tavë kosi', 'Tomato bredie', 'Königsberger Klopse', 'Frikadeller', 'Gondi (food)', 'Nem nướng', 'Spaghetti and meatballs', 'Tabriz köftesi', 'Akçaabat meatballs', 'İnegöl meatballs', 'Islama köfte', 'Sangak', 'Van köfte', 'Bakkwa', 'Bai sach chrouk', 'Carnitas', 'Cassoeula', 'Chả giò', 'Cha siu bao', 'Chanpurū', 'Chicharrón', 'Chori burger', 'Cơm tấm', 'Crackling bread', 'Crispy pata', 'Bánh cuốn', 'Embutido (Filipino cuisine)', 'Espetada', 'Flæskesteg', 'Fun guo', 'Goetta', 'Jambonette', 'Jambonneau', 'Kakuni', 'Kotlet schabowy', 'Kushikatsu', 'Kushiyaki', 'Lechon', 'Lechon kawali', 'Lechona', 'Minced pork rice', 'Menudo (stew)', 'Pata tim', 'Pig fallopian tubes', 'Porchetta', 'Pork pie', 'Pyeonyuk', 'Rica-rica', 'Rosticciana', 'Roujiamo', 'Stegt flæsk', 'Samgyeopsal', 'Satay', "Se'i", 'Sisig', 'Skirts and kidneys', 'Slavink', 'Stuffed chine', 'Guanciale', 'Tamale', 'Taro dumpling', "Tokwa't baboy", 'Tonkatsu', 'Trinxat', 'Croque monsieur', 'Omelette', 'Denver sandwich', 'Francesinha', 'Cordon bleu (dish)', 'Ham salad', 'Schnitz un knepp', 'Toast Hawaii', 'Butter chicken', 'Buldak', 'Orange chicken', 'White cut chicken', 'Afritada', 'Adobo', 'Ají de gallina', 'Andong jjimdak', 'Arroz con pollo', 'Betutu', 'Ayam kecap', 'Ayam Taliwang', "Beggar's chicken", 'Bourbon chicken', 'Brown stew chicken', 'Bubur ayam', 'Buffalo wing', 'Cashew chicken', 'Chimaek', 'Chicken 65', 'Chicken à la King', 'Chicken and waffles', 'Cacciatore', 'Chicken Chettinad', 'Chicken curry', 'Chicken fingers', 'Chicken karahi', 'Chicken Kiev', 'Chicken lollipop', 'Chicken mull', 'Chicken and mushroom pie', 'Chicken riggies', 'Chicken tikka masala', 'Laziji', 'Chikuzenni', 'Chili chicken', 'Chinese chicken salad', 'Claypot rice', 'Coronation chicken', 'Country Captain', 'Coxinha', 'Crispy fried chicken', 'Dak-galbi', 'Dakjuk', 'Dak-kkochi', 'Flying Jacob', 'Fried chicken', 'Galinha à portuguesa', 'Gulai ayam', 'Hainanese chicken rice', 'Hot chicken', 'Huli-huli chicken', 'Chicken inasal', 'Jerusalem mixed grill', 'Kedjenou', 'Kelaguen', 'Kung Pao chicken', 'Lontong cap go meh', 'Mangalorean Chicken Sukka', 'Murgh musallam', 'Musakhan', 'Nasi liwet', 'Nasi tim', 'Olivier salad', 'Ostropel', 'Padak', 'Pininyahang manok', 'Piyanggang manok', 'Pollo al disco', 'Poulet au fromage', 'Shawarma', 'Sorol (food)', 'Soy sauce chicken', 'Spice bag', 'Swiss wing', 'Tavuk göğsü', 'Chili dog', 'Battered sausage', 'Bacon Explosion', 'Bagel dog', 'Bangers and mash', 'Bigos', 'Cassoulet', 'Cheese dog', 'Coddle', 'Corn dog', 'Currywurst', 'Fasole cu cârnați', 'Galette', 'Galette-saucisse', 'Jambalaya', 'Ketwurst', 'Linsen mit Spätzle', 'Maxwell Street Polish', 'Michigan hot dog', 'Pepperoni roll', 'Polish Boy', 'Red beans and rice', 'Sausage bread', 'Toad in the hole', 'Hot dog', 'Danger dog', 'Completo', 'Bagel', 'Chicago-style hot dog', 'Cincinnati chili', 'Coney Island hot dog', 'Dodger Dog', 'Half-smoke', 'Hamdog', 'Hot wiener', 'Italian hot dog', 'Kielbasa', 'Ripper (food)', 'Seattle-style hot dog', 'Vegetarian hot dog', 'White hot', 'Crab in oyster sauce', 'Chilli crab', 'Crab dip', 'Crab in Padang sauce', 'Crab Rangoon', 'Crab stick', 'Curacha Alavar', 'Cuban bread', 'Jeotgal', 'Kakuluwo curry', 'Kung chae nampla', 'Al pastor', 'Gyro (food)', 'Lechon manok', 'Spettekaka', 'Mattha', 'Montreal-style smoked meat', 'Cecina (meat)', 'Elenski but', 'Pig candy', 'Chinese sausage', 'Chorizo', 'Mettwurst', 'Alheira', 'Andouille', 'Kabanos', 'Ciauscolo', 'Krakowska', 'Braunschweiger (sausage)', 'Loukaniko', 'Lukanka', 'Morteau sausage', 'Rookworst', 'Teewurst', 'Baingan bharta', 'Jallab', 'Donkey burger', 'Ewa Aganyin', 'Smažený sýr', 'Bánh chưng', 'Ghapama', 'Apam balik', 'Arancini', 'Badrijani', 'Bánh bao', 'Bánh lá', 'Bánh tét', 'Bánh xèo', 'Barbajuan', 'Bhendi fry', 'Blini', 'Chatti pathiri', 'Chile relleno', 'Chiles en nogada', 'Deviled egg', 'Devils on horseback', 'Empanada', 'Gołąbki', 'Gyeran-mari', 'Hotteok', 'İmam bayıldı', 'Jucy Lucy', 'Kachori', 'Kalitsounia', 'Karnıyarık', 'Lemper', 'Ayam pansuh', 'À la Maréchale', 'Mirchi Bada', 'Pirozhki', 'Pupusa', 'Quesito', 'Tortang talong', 'Runza', 'Sgabeo', 'Stromboli (food)', 'Enne gai', 'Makdous', 'Hummus', 'Taquito', 'Wrap roti', 'Zongzi', 'Rustico (pastry)', 'Pineapple bun', 'Cocktail bun', 'Jjinppang', 'Hoppang', 'Nikuman', 'Peanut butter bun', 'Xiaolongbao', 'Tufahije', 'Turon (food)', 'Cornulețe', 'Cuccidati', 'Éclair', 'Klepon', 'Milk-cream strudel', 'Poornalu', 'Pootharekulu', "Puits d'amour", 'Scovardă', 'Şöbiyet', 'Swiss roll', 'Unnakai', 'Cannoli', 'Aloo pie', 'Berliner (doughnut)', 'Birnbrot', 'Chorley cake', 'Cuban pastry', 'Gibanica', 'Gujia', 'Hwangnam-ppang', 'Heong Peng', 'Kołacz', 'Makroudh', 'Marillenknödel', 'Milhoja', 'Moorkop', 'Öçpoçmaq', 'Panzerotti', 'Pastizz', 'Profiterole', 'Punschkrapfen', 'Sfogliatella', 'Spanakopita', 'Cheese roll', 'Egg roll', 'Kati roll', 'Ngo hiang', 'Prawn roll', 'Rice noodle roll', 'Gỏi cuốn', 'Popiah', 'Šoldra', 'Morcón', 'Usban', 'Paratha', 'Aloo paratha', 'Ravioli', 'Cannelloni', 'Maultasche', 'Mezzelune', 'Paccheri', 'Chicago-style pizza', 'Calzone', 'Caprese salad', 'Bruschetta', 'Qalayet bandora', 'Pa amb tomàquet', 'Panzanella', 'Pasta al pomodoro', 'Stir-fried tomato and scrambled eggs', 'Tomato omelette', 'Amlu', 'Gianduja (chocolate)', 'Cretons', 'Guacamole', 'Coconut jam', 'Maple butter', 'Marshmallow creme', 'Pesto', 'Peabutter', 'Pimento cheese', 'Rillettes', 'Tapenade', 'Taramasalata', 'Tartar sauce', 'Zacuscă', 'Almogrote', 'Benedictine (spread)', 'Cervelle de canut', 'Cold pack cheese', 'Creole cream cheese', 'Fromage blanc', 'Moretum', 'Obatzda', 'Apple butter', 'Bar-le-duc jelly', 'Birnenhonig', "Cabell d'àngel", 'Confiture de lait', 'Eggplant jam', 'Guava jelly', 'Marmalade', 'Powidl', 'Ube halaya', 'Cenovis', 'Guinness Yeast Extract', 'Promite', 'Spoon sweets', 'Tempeh', 'Nattō', 'Doenjang', 'Douchi', 'Kinema', 'Miso', 'Tauco', 'Stinky tofu', 'Tofu skin roll', 'Dubu-kimchi', 'Mapo tofu', 'Tahu goreng', 'Crudités', 'Leblebi', 'Sarva Pindi', 'Kue', 'Krupuk', 'Kripik', 'Botamochi', 'Daifuku', 'Dorayaki', 'Manjū', 'Monaka', 'Imagawayaki', 'Kusa mochi', 'Taiyaki', 'Yōkan', 'Karintō', 'Okonomiyaki', 'Kappa Ebisen', 'Pocky', 'Konpeitō', 'Gummy candy', 'Kakigōri', 'Mochi ice cream', 'Roasted sweet potato', 'Kenpi', 'Agemochi', 'Arare (food)', 'Dango', 'Kaki no tane', 'Senbei', 'Bakauke', 'Olive no Hana', 'Club sandwich', 'Submarine sandwich', 'Malfouf salad', 'Urnebes', 'Bionico', 'Buljol', 'Candle salad', 'Baba ghanoush', 'Kısır', 'Kuluban', 'Maple slaw', 'Matbukha', 'Mizeria', 'Nam Khao', 'Nan gyi thohk', 'Pantesca salad', 'Sabzi khordan', 'Salade cauchoise', 'Salmagundi', 'Seafoam salad', 'Snow White salad', 'Sōmen salad', 'Strawberry delight', 'Ulam (salad)', 'Blue cheese dressing', 'Caesar salad', 'Italian dressing', 'Louis dressing', 'Ranch dressing', 'Russian dressing', 'Salad cream', 'Thousand Island dressing', 'Wafu dressing', 'Thai salads', 'Bagoong fried rice', 'Pe htaw bhut htamin', 'Fried rice', 'Lyonnaise potatoes', 'Arroz caldo', 'Congee', 'Barley gruel', 'Brenntar', 'Bubur ketan hitam', 'Chatang', 'Champorado', 'Cream of Wheat', 'Cuccìa', 'Grits', 'Genfo', 'Gachas', 'Kaymak', 'Hapanvelli', 'Harees', 'Helmipuuro', 'Hobak-juk', 'Jeonbok-juk', 'Jangguk-juk', 'Jatjuk', 'Kānga pirau', 'Konkonte', 'Koozh', 'Krentjebrij', 'Laba congee', 'Lugaw', 'Mala Mogodu', 'Ugali', 'Mămăligă', 'Polenta', 'Maypo', 'Mieum (food)', 'Močnik', 'Ogok-bap', 'Øllebrød', 'Rugbrød', 'Papeda (food)', 'Mielie-meal', 'Pastel de choclo', 'Pease pudding', 'Puchero', 'Rødgrød', 'Rømmegrøt', 'Rubaboo', 'Maple sugar', 'Sowans', 'Stip (dish)', 'Talbina', 'Tarak-juk', 'Tinutuan', 'Tsampa', 'Upma', 'Vispipuuro', 'Wheatena', 'Choux pastry', 'Brioche', 'Croissant', 'Danish pastry', 'Apfelküchle', 'Chebakia', 'Gukhwa-ppang', 'Ciulama', 'Cocoloși', 'Akple', 'Banku', 'Corn pudding', 'Creamed corn', 'Ginataang mais', 'Kačamak', 'Pashofa', 'Binaki', 'Humita', 'Pamonha', 'Arepa', 'Bollo', 'Broa', 'Chipa guasu', 'Corn cookie', 'Corn tortilla', 'Cornbread', 'Makki di roti', 'Piki', 'Proja', 'Sloosh', 'Sope', 'Spoonbread', 'Talo (food)', 'Totopo', 'Wotou', 'Tortilla chip', 'Tostada (tortilla)', 'Corn fritter', 'Cornick (food)', 'Hushpuppy', 'Milho frito', 'Alivenci', 'Binatog', 'Corn flakes', 'Kenkey', 'Maíz con hielo', 'Maja blanca', 'Succotash', 'Tejuino', 'Chiffon cake', 'Lemon ice box pie', 'Graham cracker', 'Meringue', 'Lemon tart', 'Liverpool Tart', 'Shaker lemon pie', 'Sussex pond pudding', 'Linguine', 'Sauce vierge', 'Limoncello', 'Akara', 'Aloo mutter', 'Amanattō', 'Arroz con gandules', 'Balila (dish)', 'Bap (food)', 'Bean pie', 'Bigilla', 'Burmese tofu', 'Callos', 'Chana masala', 'Chapea', 'Ciceri e tria', 'Dal bhat', 'Dhokla', 'Doubles (food)', 'Ful medames', 'Gallo pinto', 'Ghugni', 'Githeri', 'Green bean casserole', 'Guernsey Bean Jar', "Hoppin' John", 'Kuli-kuli', 'Kongbap', 'Kosambari', 'Kuzhambu', 'Lobio', 'Mattar paneer', 'Msabbaha', 'Mujaddara', 'Murukku', 'Papadum', 'Pie and peas', 'Pie floater', 'Porotos con riendas', 'Red bean cake', 'Ragda pattice', 'Red bean ice', 'Sambar (dish)', 'Shiro (food)', 'Tavče gravče', 'Texas caviar', 'Tortillitas de camarones', 'Waakye', 'Chelow kabab', 'Bagna càuda', 'Smörgåsbord', 'Mango pudding', 'Aavakaaya', 'Es teler', 'Tanghulu', 'Spotted dick', 'Waldorf salad', 'Ambrosia (fruit salad)', 'Black bun', 'Brown Betty (dessert)', 'Clafoutis', 'Cobbler (food)', 'Cranachan', 'Crumble', 'Date shake', 'Es buah', 'Es campur', 'Eton mess', 'Flaugnarde', 'Fruit fool', 'Fruitcake', 'Green papaya salad', 'Kompot', 'Pineapple cake', 'Pineapple tart', 'Poire à la Beaujolaise', 'Poire belle Hélène', 'Rojak', 'Smulpaj', 'Tarte Tatin', 'Watergate salad', 'Apple pie', 'Blackberry pie', 'Blueberry pie', 'Bumbleberry pie', 'Grape pie', 'Key lime pie', 'Mince pie', 'Rhubarb pie', 'Summer pudding', 'Malvern pudding', 'Ozark pudding', 'Persimmon pudding', 'Maple syrup', 'Waffle', 'French toast', 'Maple taffy', 'Maple liqueur', 'Maple bacon donut', 'Saeu-jeot', 'Goiabada', 'Ssamjang', 'Satsivi', 'Baklava', 'Phanaeng', 'Jeow bong', 'Sambal', 'Huff paste', 'Ajapsandali', 'Baghaar-e-baingan', 'Beguni', 'Dahi baigana', 'Escalivada', 'Lasagne', 'Malidzano', 'Mirza Ghassemi', 'Pasta alla Norma', 'Sabich', 'Tepsi baytinijan', 'Balado (food)', 'Tombet', 'Agnolotti', 'Akashiyaki', 'Ada (food)', 'Ba-wan', 'Bánh tẻ', 'Blodpalt', 'Bryndzové halušky', 'Buuz', 'Cepelinai', 'Caozaiguo', 'Capuns', 'Chapalele', 'Cho muang', 'Joshpara', 'Cifantuan', 'Cilok', 'Dampfnudel', 'Dim sim', 'Ducana', 'Germknödel', 'Jiaozi', 'Hujiao bing', 'Idli', 'Idrijski žlikrofi', 'Yau gok', 'Kalduny', 'Khuushuur', 'Kluski', 'Kopytka', 'Kozhukkatta', 'Kroppkaka', 'Kue putu mangkok', 'Kue kochi', 'Lo mai gai', 'Lukhmi', 'Modak', 'Mandu-gwa', 'Mitarashi dango', 'Mont phet htok', 'Nagasari', 'Pantruca', 'Pelmeni', 'Pickert', 'Pitepalt', 'Pitha', 'Poutine râpée', 'Pundi', 'Raspeball', 'Shengjian mantou', 'Schupfnudel', 'Shlishkes', 'Shumai', 'Siomay', 'Strapačky', 'Chaoshou', 'Tangyuan (food)', 'Uszka', 'Zhaliang', 'Bouillon cube', 'Neapolitan ice cream', 'Fig roll', 'Chuño', 'Budu (sauce)', 'Lefse', 'Mojama', 'Tatami iwashi', 'Carne seca', 'Chipped beef', 'Droëwors', 'Boerewors', 'Jamón ibérico', 'Jamón', 'Pancetta', 'Pepperoni', 'Sukuti', 'Tapa (Filipino cuisine)', 'Kitchener bun', 'Filhó', 'Malasada', 'Oliebol', 'Mekitsa', 'Pączki', 'Puff-puff', 'Dutchie (doughnut)', 'Potato doughnut', 'Ox-tongue pastry', 'Youtiao', 'Fritelli', 'Kroštule', 'Beignet', 'Zeppole', 'Diples', 'Fánk', 'Gulab jamun', 'Balushahi', 'Imarti', 'Adhirasam', 'Sufganiyah', 'Struffoli', 'Pignolata', 'Sata andagi', 'An-doughnut', 'Curry bread', 'Mandazi', 'Chapssal doughnut', 'Sfinz', 'Churro', 'Sfenj', 'Smultring', 'Picarones', 'Binangkal', 'Cascaron', 'Lokot-lokot', 'Maruya (food)', 'Gogoși', 'Peremech', 'Uštipci', 'Koeksister', 'Vetkoek', "Koe'sister", 'Khanom khai hong', 'Bambalouni', 'Tulumba', 'Boston cream doughnut', 'Sour cream doughnut', 'Cider doughnut', 'Bear claw (pastry)', 'Frybread', 'Prusurate', "Bird's Custard", 'Jell-O', 'Cheesecake', 'Allahabadi cake', 'Allerheiligenstriezel', 'Amandine (dessert)', 'Angel cake', 'Angel food cake', 'Banbury cake', 'Bánh', 'Bánh bò', 'Bánh chuối', 'Bánh da lợn', 'Bánh khoai mì', 'Battenberg cake', 'Berlingozzo', 'Better than sex cake', 'Bika ambon', 'Black Forest gateau', 'Blondie (confection)', 'Chocolate brownie', 'Buccellato', 'Buckwheat gateau', 'Bulla cake', 'Bundt cake', 'Butterkuchen', 'Cake pop', 'Caraway seed cake', 'Carrot cake', 'Cassata', 'Castella', 'Charlotte (cake)', 'Chelsea bun', 'Havregrynskugle', 'Chongyang cake', 'Coconut cake', 'Cupcake', 'Cupcone', 'Dacquoise', 'Depression cake', "Devil's food cake", 'Dirt cake', 'Doberge cake', 'Dobos torte', 'Donauwelle', 'Dundee cake', 'Eccles cake', 'Esterházy torte', 'Fat rascal', 'Financier (cake)', 'Frankfurter Kranz', 'Frog cake', 'Funing big cake', 'Garash cake', 'Genoa cake', 'Genoise', 'German chocolate cake', 'Gooey butter cake', "Groom's cake", 'Gugelhupf', 'Happy cake', 'Heavy cake', 'Hot milk cake', 'Hummingbird cake', 'Jewish apple cake', 'Joffre cake', 'Sarawak layer cake', 'Kentucky jam cake', 'Kyiv cake', 'Kladdkaka', 'Kransekake', 'Ladyfinger (biscuit)', 'Lamington', 'Lane cake', 'Lardy cake', 'Lekach', 'Linzer torte', 'Madeleine (cake)', 'Malt loaf', 'Marble cake', 'Mazurek (cake)', 'Međimurska gibanica', 'Molten chocolate cake', 'Ontbijtkoek', 'Opera cake', "Pain d'épices", 'Pandan cake', 'Panforte', 'Panettone', 'Panpepato', 'Parkin (cake)', 'Pastiera', 'Petit four', 'Pinca', 'Ploatz', 'Prekmurska gibanica', 'Princess cake', 'Prinzregententorte', 'Put chai ko', 'Red velvet cake', 'Rigójancsi', 'Rock cake', 'Rum baba', 'Ruske kape', 'Sachertorte', 'Šampita', 'Sfouf', 'Song gao', 'Spanische Windtorte', 'Spekkoek', 'St. Honoré cake', 'Stack cake', 'Stollen', 'Tahinopita', 'Tarta de Santiago', 'Tea loaf', 'Tiramisu', 'Torta alla Monferrina', 'Torta caprese', 'Torta Tre Monti', 'Tu (cake)', 'Tula pryanik', 'Welsh cake', 'White sugar sponge cake', 'Yule log (cake)', 'Zuger Kirschtorte', 'Abnabat', 'Akanés', 'Besan barfi', 'Buckeye candy', 'Cajeta', 'Calisson', 'Candy apple', 'Candy pumpkin', 'Caramel apple', 'Caramel corn', 'Catànies', 'Cezerye', 'Chikki', 'Churchkhela', 'Cinnamon toothpick', 'Cocada', 'Dodol', 'Dominostein', 'Faloodeh', 'Gajak', 'Gaz (candy)', 'Geplak', 'Gibraltar rock (candy)', 'Gozinaki', 'Haw flakes', 'Ischoklad', "Ka'í Ladrillo", 'Kaju katli', 'Kakinada Kaaja', 'Kamarcut', 'Kosereva', 'Lacabòn', 'Laddu', 'Lakhamari', 'Marron glacé', 'Mendiant', 'Mooncake', 'Moustalevria', 'Mozartkugel', 'Noghl', 'Oblaat', 'Paçoca', 'Pashmak', 'Penuche', 'Persipan', 'Pontefract cake', 'Poolaki', 'Ptasie mleczko', 'Queijadinha', 'Ribbon candy', 'Rock (confectionery)', 'Rocky road (dessert)', 'Russian candy', 'Salty liquorice', 'Sandesh (confectionery)', 'Sesame seed candy', 'Singori', 'Sohan (confectionery)', 'Sugar cake', 'Sugar mice', 'Suikerboon', 'Sukhdi', 'Szaloncukor', 'Tarasari', 'Teja (confectionery)', 'Tiffin (confectionery)', 'Turkish delight', 'Zefir (food)', 'Chocolate chip', 'Bizcochito', 'Butter cookie', 'Canestrelli', 'Chocolate chip cookie', 'Colaz', 'Cookie salad', 'Coyotas', 'Finikia', 'Hallongrotta', 'Kichel', 'Kleicha', 'Krumkake', 'Kue semprit', 'Macaroon', 'Moravian spice cookies', 'Mustacciuoli', 'Nanaimo bar', 'Oatmeal raisin cookie', 'Panellets', 'Peanut butter cookie', 'Pignoli (cookie)', 'Pizzelle', 'Polvorón', 'Rainbow cookie', 'Reshteh khoshkar', 'Roskette', 'Sandbakelse', 'Silvana (food)', 'Stroopwafel', 'Tuile', 'Whoopie pie', 'Quiche', 'Banana pudding', 'Bienenstich', 'Bob Andy pie', 'Boston cream pie', 'Bougatsa', 'Bread and butter pudding', 'Buttermilk pie', 'Chiboust cream', 'Cream pie', 'Crème brûlée', 'Crème caramel', 'Custard tart', 'Egg tart', 'Far Breton', 'Flapper pie', 'Floating island (dessert)', 'Kogel mogel', 'Cremeschnitte', 'Napoleonka', 'Mató de Pedralbes', 'Melktert', 'Natillas', 'Neenish tart', 'Norman Tart', 'Pastel de nata', 'Pio Quinto', 'Pot de crème', 'Pumpkin pie', 'Queen of Puddings', 'Quindim', 'Salzburger Nockerl', 'Skolebrød', 'Sweet potato pie', 'Treacle sponge pudding', 'Trifle', 'Vla', 'Watalappam', 'Zabaione', 'Chancaca', 'Hard sauce', 'Rumtopf', 'Slatko', 'Çäkçäk', 'Coconut doughnut', 'Fried Coke', 'Frittole (doughnut)', 'Gosh-e fil', 'Jalebi', 'Luther Burger', 'Mahua (snack)', 'Nonnevot', 'Pastisset', 'Pestiños', 'Shuangbaotai', 'Açaí na tigela', 'Baked Alaska', 'Bombe glacée', 'Patbingsu', 'Café liégeois', 'Cendol', 'Creme de papaya', 'Frozen yogurt', 'Gelato', 'Granita', 'Grattachecca', 'Halo-halo', 'Huckabuck', 'Ice buko', 'Iskrambol', 'Italian ice', 'Kulfi', 'Piragua (food)', 'Semifreddo', 'Sno-ball', 'Zuccotto', 'Arctic roll', 'Banana split', 'Biscuit Tortoni', 'Booza', 'Chocolate chip cookie dough ice cream', 'Choc-top', 'Dondurma', 'Fried ice cream', 'Ice cream float', 'Alaskan ice cream', 'Indian ice cream (Canada)', 'Parfait', 'Spaghettieis', 'Stracciatella (ice cream)', 'Alexandertorte', 'Apple strudel', 'Bakewell pudding', 'Banitsa', 'Dutch letter', 'Belekoy', 'Belokranjska povitica', 'Bethmännchen', 'Boyoz', 'Briouat', 'Bruttiboni', 'Carac (pastry)', 'Chasan (pastry)', 'Chouquette', 'Cinnamon roll', 'Coca (pastry)', 'Coussin de Lyon', 'Ensaïmada', 'Fa gao', 'Fish-shaped pastry', "Flies' graveyard", 'Franzbrötchen', 'Gâteau Basque', 'Gundain', 'Honey bun', 'Inipit', 'Kalach (food)', 'Kanafeh', 'Knieküchle', 'Leipziger Lerche', 'Mandelkubb', 'Mantecadas', 'Masan (pastry)', "Nun's puffs", 'Papanași', 'Paper wrapped cake', 'Pastry heart', 'Punsch-roll', 'Qottab', 'Rab cake', 'Remonce', 'Roze koek', 'Runeberg torte', 'Schneeball (pastry)', 'Spanisch Brötli', 'Streusel', 'Strudel', 'Sweetheart cake', 'Tahini roll', 'Tortita negra', 'Otap (food)', 'Vatrushka', 'Vol-au-vent', 'Yurla (dish)', 'Zeeuwse bolus', 'Žemlovka', 'Kifli', 'Kūčiukai', 'Nut roll', 'Rugelach', 'Bakewell tart', 'Banoffee pie', 'Bedfordshire clanger', 'Buko pie', 'Chess pie', 'Derby pie', 'Fried pie', 'Mississippi mud pie', 'Pecan pie', 'Rijstevlaai', 'Rönttönen', 'Saskatoon berry pie', 'Shoofly pie', 'Treacle tart', 'Vlaai', 'Butter tart', 'Caramel tart', 'Conversation tart', 'Crostata', 'Gizzada', 'Gypsy tart', 'Quetschentaart', 'Mousse', 'Ábrystir', 'Ashure', 'Bebinca', 'Bread pudding', 'Capirotada', 'Chocolate biscuit pudding', 'Christmas pudding', 'Clootie', 'Cottage pudding', 'Diplomat pudding', 'Figgy duff (pudding)', 'Flummadiddle', 'Flummery', 'Fruit pudding', 'Goody (dessert)', 'Götterspeise', 'Haupia', 'Kalamai (dessert)', 'Kirschenmichel', 'Kulolo', 'Malva pudding', 'Panna cotta', 'Rice pudding', 'Tembleque', 'Welf pudding', 'Khobz Mbesses', 'Chocolate crackles', 'White Christmas (food)', 'Chomchom', 'Beijinho', 'Bolo de rolo', 'Cajuzinho', 'Canjica (dish)', 'Cuajada', 'Curau', 'Manjar branco', 'Maria-mole', 'Papo-de-anjo', 'Persian (roll)', 'Mote con huesillo', 'Murta con membrillo', 'Croquembouche', 'Koulourakia', 'Melomakarono', 'Mango pomelo sago', 'Vanillekipferl', 'Chhena gaja', 'Es doger', 'Kolak', 'Lupis (food)', 'Nata de coco', 'Biscotti', 'Biscotti Regina', 'Ciarduna', 'Pandoro', 'Pevarini', 'Hakuto jelly', 'Batik cake', 'Ais kacang', 'Nicuatole', 'Afghan biscuit', 'Fairy bread', 'Hokey pokey (ice cream)', 'Lolly cake', 'Bolo de arroz', 'Bolo de mel', 'Fios de ovos', 'Magiun of Topoloveni', 'Paska (bread)', 'Abernethy biscuit', 'Deep-fried Mars bar', 'Empire biscuit', 'Funšterc', 'Fartons', 'Leche frita', 'Sobao', 'Tecula mecula', 'Xuixo', 'Yemas de Santa Teresa', 'Neula', 'Blue cake', 'Bündner Nusstorte', 'Aiyu jelly', 'Bubble tea', 'Taro ball', 'Khao tom', 'Mango sticky rice', 'Thong yip', 'Thapthim krop', 'Şekerpare', 'Bülbül yuvası', 'Güllaç', 'Kalburabastı', "Lady's navel", 'Sütlü Nuriye', 'Khabees', 'Cocada amarela', 'Poi (dessert)', 'Alcapurria', 'Bamischijf', 'Batata vada', 'Bhatoora', 'Bikaneri bhujia', 'Bonda', 'Boondi', 'Cașcaval pane', 'Chimichanga', 'Creier pane', 'Far far', 'Kakara pitha', 'Kokis', 'Luchi', 'Steak pie', 'Medu vada', 'Mozzarella sticks', 'Namak para', 'Panipuri', 'Patrode', 'Pholourie', 'Puri (food)', 'Sachima', 'Scotch egg', 'Sev (food)', 'Shankarpali', 'Spam fritter', 'Supplì', 'Swikee', 'Deep fried Oreo', 'Fish finger', 'Keripik sanjai', 'Gobi Manchurian', 'Fried plantain', 'Pommes dauphine', 'Savoury pattie', 'Chicken fried bacon', 'Tahu sumedang', 'Tenkasu', 'Peanut butter blossom cookie', 'Brazo de Mercedes', 'Crema de fruta', 'Karpatka', 'Tompouce', 'Wuzetka', 'Yema (candy)', 'Coffee jelly', 'Roti', 'Red-eye gravy', 'Puttu', 'Serundeng', 'Unni appam', 'Baye baye', 'Bibikkan', 'Boston bun', 'Botok', 'Bukayo', 'Buntil', 'Burasa', 'Espasol', 'Grater cake', 'Kẹo dừa', 'Kerak telor', 'Kobbari Lavuju', 'Kora Khai', 'Sticky rice in bamboo', 'Kue putu', 'Kutsinta', 'Lawar (food)', 'Lo mai chi', 'Oil down', 'Olho-de-sogra', 'Palitaw', 'Pan de coco', 'Pitsi-pitsî', 'Pol sambola', 'Pumpkin-coconut custard', 'Puto', 'Sapin-sapin', 'Toto (dessert)', 'Urap', 'Wingko', 'Sandwiches de miga', 'Damper (food)', 'Golden syrup', 'Cougnou', 'Pan de Pascua', 'Risalamande', 'Karelian pasty', 'Imelletty perunalaatikko', 'Karelian hot pot', 'Aachener Printen', 'Lebkuchen', 'Springerle', 'Soused herring', 'Mathri', 'Chhena poda', 'Khoa', 'Cap cai', 'Saffron bun', 'Multekrem', 'Bibingka', 'Česnica', 'Potjiekos', 'Bobotie', 'Hertzoggie', 'Crispbread', 'Knäck', 'Oyster stew', 'Chocolate-covered potato chips', 'White chocolate', 'Winter ice cream', 'Ganache', 'Guasanas', 'Chakhchoukha', 'Mysore pak', 'Chakli', 'Chickpea bread', 'Chickpea noghl', 'Khaman', 'Lagane e cicciari', 'Soan papdi', 'Macaroni and cheese', 'American goulash', 'Baeckeoffe', 'Baked ziti', 'Chili mac', 'Frito pie', 'Funeral potatoes', 'Gratin dauphinois', 'Johnny Marzetti', 'Krupenik', 'Kugel', 'Maqluba', 'Pastitsio', 'Pâté aux pommes de terre', 'Pâté chinois', 'Potato babka', 'Rappie pie', 'Undhiyu', 'Chai tow kway', 'Gajar ka halwa', 'Countess (cake)', 'Ul boov', 'Knieperkohl', 'Bacon and cabbage', 'Bubble and squeak', 'Túrós csusza', 'Colcannon', 'Podvarak', 'Rumbledethumps', 'Curtido', 'Anadama bread', 'Bacon sandwich', 'Banana bread', 'Bhakri', 'Bialy (bread)', 'Breakfast burrito', 'Breakfast sandwich', 'Chilaquiles', 'Creamed eggs on toast', 'Diyabath', 'Eggs Benedict', 'Egg bhurji', 'White pudding', 'Fatoot samneh', 'Frittata', 'Huevos rancheros', 'Huevos motuleños', 'Jianbing', 'Kulcha', 'Katogo (food)', 'Loco moco', 'Menemen (food)', 'Manakish', 'Mandoca', 'Meeshay', 'Mie goreng', 'Migas', 'Monkey bread', 'Mugoyo', 'Nasi lemak', 'Nasi goreng', 'Roti john', 'Pain au chocolat', 'Pain aux raisins', 'Palmier', 'Pan de yuca', 'Pandesal', 'Pebete', 'Phitti', 'Popover', 'Portuguese sweet bread', 'Potato scone', "Potatoes O'Brien", 'Pumpkin bread', 'Sabaayad', 'Scone', 'Scrapple', 'Shrimp and grits', 'Silog', 'Slinger (dish)', 'Viennoiserie', 'Water biscuit', 'Bánh bột lọc', 'Chinese steamed eggs', 'Galbi-jjim', 'Gyeran-jjim', 'Kue lapis', 'Nasi campur', 'Enduri Pitha', 'Manda pitha', 'Mantou', 'Milk roll', 'Bakpau', 'Lotus seed bun', 'Mandarin roll', 'Bánh bèo', 'Rava idli', 'Khanom sai bua', 'Red tortoise cake', 'Taro cake', 'Turnip cake', 'Uirō', 'Karukan', 'Kuih', 'Clorot', 'Kue mangkok', 'Chawanmushi', 'Lepet', 'Moin moin', 'Cabinet pudding', 'Sticky toffee pudding', 'Suet pudding', 'Fruit hat (pudding)', 'Jam roly-poly', 'Suman (food)', 'Tteok', 'Injeolmi', 'Jeungpyeon', 'Mujigae-tteok', 'Siru-tteok', 'Sher Berinj', 'Poutine', 'Fatteh', 'Koshary', 'Cart noodle', 'Macaroni', 'Pav bhaji', 'Curd rice', 'Gado-gado', 'Carbonara', 'Filipino spaghetti', 'Kare-kare', 'Zapiekanka', 'Mofongo', 'Shashlik', 'Salchichón', 'Ta-a noodles', 'Cauliflower cheese', 'Yorkshire pudding', 'Jajangmyeon', 'Yakisoba', 'Chow mein sandwich', 'Maggi goreng', 'Singapore-style noodles', 'Lamian', 'Khauk swè thoke', 'Sigyet khauk swè', 'Drunken noodles', 'Hot dry noodles', 'Luosifen', 'Satay bee hoon', 'Shanghai fried noodles', 'Zhajiangmian', 'Passatelli', 'Spätzle', 'Kwetiau goreng', 'Bihun goreng', 'Char kway teow', 'Mie caluk', 'Mie gomak', 'Mie jawa', 'Mie kangkung', 'Mie kering', 'Shirataki noodles', 'Sara udon', 'Tensoba', 'Yaki udon', 'Bibim-guksu', 'Japchae', 'Jjolmyeon', 'Rabokki', 'Lard na', 'Pad see ew', 'Lor mee', 'Mee siam', 'Kinalas', 'Pancit estacion', 'Katong laksa', 'Vegetarian bee hoon', 'Pad thai', 'Mi krop', 'Rat na', 'Bánh hỏi', 'Bun cha', 'Bún thịt nướng', 'Flour tortilla', 'Arizona cheese crisp', 'Chalupa', 'Corn burrito', 'Empalme (food)', 'Entomatada', 'Gringas', 'Güirila', 'Sincronizada', 'Tlayuda', 'Dakos', 'Khachapuri', 'Chili parotha', "Beurre Maître d'Hôtel", 'Beurre noir', 'Beurre noisette', 'Butter pie', 'Butter tea', 'Butterbrot', 'Buttery (bread)', 'Hollandaise sauce', 'Pozharsky cutlet', 'Aligot', 'Cheese dream', 'Cheese fries', 'Cheese slaw', 'Chhena Jhili', 'Ema datshi', 'Frico', 'Gougère', 'Hauskyjza', 'Hellimli', 'Käsespätzle', 'Kasseropita', 'Papas chorreadas', 'Rasabali', 'Tartiflette', 'Tiropita', 'Ziva (dish)', 'Chhena jalebi', 'Chhena kheeri', 'Khoya paneer', 'Palak paneer', 'Paneer tikka', 'Paneer tikka masala', 'Rasgulla', 'Koba (sweet)', 'Bamba (snack)', 'Peanut stew', 'Mirchi ka salan', 'Karedok', 'Ketoprak (dish)', 'Pecel', 'Nasi pecel', 'Rempeyek', 'Dessert bar', 'Oh Henry!', "Fool's Gold Loaf", 'Peanut butter, banana and bacon sandwich', 'Colomba di Pasqua', 'Dariole', 'Jésuite', 'Muskazine', 'Tabrizi Lovuez', 'Acıbadem kurabiyesi', 'Amaretti di Saronno', 'Ricciarelli', 'Speculaas', 'Tortas de aceite', 'Almond Roca', "Eve's pudding", 'Banana ketchup', 'Bananas Foster', 'Ginanggang', 'Mangú', 'Pinasugbo', 'Tacacho', 'Crozets de Savoie', 'Kig ha farz', 'Pizzoccheri', 'Cherpumple', 'Michigan salad'
+                ];
+
+        $( "#food-search" ).autocomplete({
+          source: availableTags
+        });
+        } );
+    </script>
+  </head>
+  <body class="animate__animated animate__zoomIn animate__fast globe-image">
+  <div class="grid">
+    <header>
+      <div class="top-left">
+      </div>
+    </header>
+    <div class="top">  
+      <h2 class="project-title">WIKI2VEC</h2>
+      <h3 class="project-subtitle">MAP YOUR NEXT FAVORITE MEAL</h3>
+      <span class="form__group field">
+      <div class="container">
+          <div class="box">
+            <input id="one" type="checkbox">
+            <span class="check"></span>
+            <label for="one">Europe</label>
+          </div>
+          <div class="box">
+            <input id="two" type="checkbox">
+            <span class="check"></span>
+            <label for="two">Middle East</label>
+          </div>
+          <div class="box">
+            <input id="three" type="checkbox">
+            <span class="check"></span>
+            <label for="three">Asia</label>
+          </div>
+          <div class="box">
+            <input id="four" type="checkbox">
+            <span class="check"></span>
+            <label for="four">Africa</label>
+          </div>
+          <div class="box">
+            <input id="five" type="checkbox">
+            <span class="check"></span>
+            <label for="five">Oceania</label>
+          </div>
+          <div class="box">
+            <input id="six" type="checkbox">
+            <span class="check"></span>
+            <label for="six">South America</label>
+          </div>
+          <div class="box">
+            <input id="seven" type="checkbox">
+            <span class="check"></span>
+            <label for="seven">Central America</label>
+          </div>
+          <div class="box">
+            <input id="eight" type="checkbox">
+            <span class="check"></span>
+            <label for="eight">North America</label>
+          </div>
+          <div class="box">
+            <input id="nine" type="checkbox">
+            <span class="check"></span>
+            <label for="nine">Caribbean</label>
+          </div>
+          <div class="box">
+            <input id="ten" type="checkbox">
+            <span class="check"></span>
+            <label for="ten">ANYWHERE</label>
+          </div>
+        </div>
+        <form id="food-form" name="food-form" action="/closest2" method="POST">
+          <div class="container2">
+            <div class="ui-widget animate__animated animate__pulse animate__delay-1s animate__repeat-3" style="display: hidden;">
+                <label for="food-search" class="form__label"></br></br></label>
+                <input type="search" value={{ selection }} class="form__field" placeholder="Enter a dish..." required />
+            </div>
+          </div>
+      </span>
+      <div>
+          <button value="{{ selection }}" class="button" type="submit" name="food-search" id='food-search'>SPIN THE GLOBE</button>
+        </form>
+      </div>
+      </div>
+      </form>
+    </div>
+    <div class="bottom">  
+    </div>  
+  </body>
+</html>
